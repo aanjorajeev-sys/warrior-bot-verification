@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Warrior Bot | Minecraft Verification</title>
+
+<style>
+
+/* =========================================
+   FONTS
+========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   VARIABLES
+========================================= */
+
+:root {
+    --blue: #168cff;
+    --blue-dark: #0759a8;
+    --blue-light: #5dc0ff;
+
+    --dark: #030810;
+    --panel: rgba(4, 12, 24, 0.96);
+
+    --border: rgba(50, 145, 230, 0.45);
+
+    --white: #ffffff;
+    --muted: #91a5ba;
+
+    --green: #35e58a;
+    --red: #ff4f5e;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+body {
+    min-height: 100vh;
+
+    font-family: 'Rajdhani', sans-serif;
+
+    color: var(--white);
+
+    background:
+        #02060d
+        url("https://i.postimg.cc/7hQnH1Yx/8084274.jpg")
+        center center / cover
+        fixed no-repeat;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+.background {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 4, 12, 0.35),
+            rgba(0, 5, 15, 0.82)
+        );
+
+    pointer-events: none;
+}
+
+
+/* Minecraft pixel overlay */
+
+.background::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,0.018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.018) 1px,
+            transparent 1px
+        );
+
+    background-size: 4px 4px;
+}
+
+
+/* =========================================
+   PAGE
+========================================= */
+
+.page {
+    min-height: 100vh;
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 40px 20px;
+}
+
+
+/* =========================================
+   MAIN CARD
+========================================= */
+
+.card {
+
+    width: min(510px, 100%);
+
+    padding: 38px;
+
+    position: relative;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(10, 25, 44, 0.98),
+            rgba(2, 8, 17, 0.98)
+        );
+
+    border: 1px solid var(--border);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,0.7),
+        inset 0 0 35px rgba(0,100,255,0.04);
+
+    clip-path: polygon(
+        12px 0,
+        calc(100% - 12px) 0,
+        100% 12px,
+        100% calc(100% - 12px),
+        calc(100% - 12px) 100%,
+        12px 100%,
+        0 calc(100% - 12px),
+        0 12px
+    );
+}
+
+
+/* Pixel corners */
+
+.card::before,
+.card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 12px;
+
+    height: 12px;
+
+    background: var(--blue);
+
+}
+
+.card::before {
+    top: 0;
+    left: 0;
+}
+
+.card::after {
+    right: 0;
+    bottom: 0;
+}
+
+
+/* =========================================
+   BRAND
+========================================= */
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 30px;
+}
+
+
+.brand-icon {
+
+    width: 56px;
+
+    height: 56px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 26px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #168ce8,
+            #063d78
+        );
+
+    border: 2px solid #5bbcff;
+
+    box-shadow:
+        0 6px 0 #032a4c,
+        inset 0 0 15px rgba(255,255,255,0.1);
+}
+
+
+.brand h1 {
+
+    font-family: 'Press Start 2P', monospace;
+
+    font-size: 16px;
+
+    letter-spacing: 1px;
+}
+
+
+.brand p {
+
+    margin-top: 8px;
+
+    color: var(--blue-light);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+}
+
+
+/* =========================================
+   INTRO
+========================================= */
+
+.intro {
+
+    margin-bottom: 28px;
+}
+
+
+.intro h2 {
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+}
+
+
+.intro p {
+
+    color: var(--muted);
+
+    font-size: 16px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.form-group {
+
+    margin-bottom: 23px;
+}
+
+
+.form-group > label {
+
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #c0d0df;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================
+   USERNAME INPUT
+========================================= */
+
+.input-box {
+
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    background: rgba(1,7,15,0.9);
+
+    border: 1px solid #2a425c;
+
+    transition: 0.2s;
+}
+
+
+.input-box:focus-within {
+
+    border-color: var(--blue);
+
+    box-shadow:
+        0 0 0 2px rgba(22,140,255,0.1);
+}
+
+
+.input-icon {
+
+    width: 50px;
+
+    display: flex;
+
+    justify-content: center;
+
+    font-size: 21px;
+
+    color: var(--blue-light);
+}
+
+
+.input-box input {
+
+    width: 100%;
+
+    height: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-family: 'Rajdhani', sans-serif;
+
+    font-size: 17px;
+
+    font-weight: 600;
+}
+
+
+.input-box input::placeholder {
+
+    color: #60748a;
+}
+
+
+.help-text {
+
+    display: block;
+
+    margin-top: 7px;
+
+    color: #63788e;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   EDITION
+========================================= */
+
+.editions {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+
+.edition {
+
+    cursor: pointer;
+}
+
+
+.edition input {
+
+    display: none;
+}
+
+
+.edition-content {
+
+    min-height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px;
+
+    background: rgba(3,10,20,0.9);
+
+    border: 1px solid #293f57;
+
+    transition: 0.2s;
+}
+
+
+.edition-content:hover {
+
+    border-color: #4c769c;
+}
+
+
+.edition input:checked + .edition-content {
+
+    border-color: var(--blue);
+
+    background: rgba(7,77,140,0.25);
+
+    box-shadow:
+        inset 0 0 20px rgba(0,120,255,0.08);
+}
+
+
+.edition-icon {
+
+    width: 38px;
+
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #0a253f;
+
+    border: 1px solid #32638e;
+
+    color: #66c1ff;
+
+    font-size: 18px;
+}
+
+
+.edition-title {
+
+    display: block;
+
+    font-size: 16px;
+
+    font-weight: 700;
+}
+
+
+.edition-description {
+
+    display: block;
+
+    margin-top: 2px;
+
+    color: #71859a;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   CAPTCHA
+========================================= */
+
+.captcha {
+
+    min-height: 72px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 13px 15px;
+
+    background: #07111e;
+
+    border: 1px solid #293f54;
+}
+
+
+.captcha-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+
+.captcha-left input {
+
+    display: none;
+}
+
+
+.checkbox {
+
+    width: 25px;
+
+    height: 25px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #02070d;
+
+    border: 2px solid #5b7087;
+}
+
+
+.captcha-left input:checked + .checkbox {
+
+    background: #1287ec;
+
+    border-color: #61c2ff;
+}
+
+
+.captcha-left input:checked + .checkbox::after {
+
+    content: "✓";
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+
+.security {
+
+    text-align: center;
+
+    color: #60758a;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+.security-icon {
+
+    font-size: 22px;
+
+    margin-bottom: 2px;
+}
+
+
+/* =========================================
+   VERIFY BUTTON
+========================================= */
+
+.verify-btn {
+
+    width: 100%;
+
+    height: 58px;
+
+    border: none;
+
+    border-top: 2px solid #66c3ff;
+
+    border-bottom: 5px solid #043d78;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            180deg,
+            #249cff,
+            #0868c4
+        );
+
+    color: white;
+
+    font-family: 'Rajdhani', sans-serif;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    transition: 0.15s;
+}
+
+
+.verify-btn:hover {
+
+    filter: brightness(1.12);
+
+    transform: translateY(-1px);
+}
+
+
+.verify-btn:active {
+
+    transform: translateY(3px);
+
+    border-bottom-width: 2px;
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.loading {
+
+    text-align: center;
+
+    padding: 20px 0;
+}
+
+
+.loader {
+
+    width: 52px;
+
+    height: 52px;
+
+    margin: 0 auto 20px;
+
+    border: 5px solid #172c43;
+
+    border-top-color: var(--blue);
+
+    animation: rotate 0.8s linear infinite;
+}
+
+
+@keyframes rotate {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+.loading h3 {
+
+    font-family: 'Press Start 2P', monospace;
+
+    font-size: 11px;
+}
+
+
+.loading p {
+
+    margin-top: 10px;
+
+    color: var(--muted);
+}
+
+
+/* =========================================
+   SUCCESS / ERROR
+========================================= */
+
+.result {
+
+    text-align: center;
+
+    padding-top: 10px;
+}
+
+
+.result-icon {
+
+    width: 70px;
+
+    height: 70px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 36px;
+
+    font-weight: bold;
+
+    border: 2px solid;
+}
+
+
+.success .result-icon {
+
+    color: var(--green);
+
+    border-color: var(--green);
+
+    background: rgba(40,220,120,0.08);
+}
+
+
+.error .result-icon {
+
+    color: var(--red);
+
+    border-color: var(--red);
+
+    background: rgba(255,50,70,0.08);
+}
+
+
+.result h2 {
+
+    font-family: 'Press Start 2P', monospace;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+.result > p {
+
+    margin: 10px 0 20px;
+
+    color: var(--muted);
+
+    font-size: 16px;
+}
+
+
+/* =========================================
+   PLAYER CARD
+========================================= */
+
+.player-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 14px;
+
+    margin-bottom: 15px;
+
+    text-align: left;
+
+    background: rgba(3,12,22,0.9);
+
+    border: 1px solid #285476;
+}
+
+
+.player-avatar {
+
+    width: 45px;
+
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #0a2c49;
+
+    font-size: 21px;
+}
+
+
+.player-card small {
+
+    display: block;
+
+    color: #66819b;
+
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+}
+
+
+.player-card strong {
+
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 19px;
+}
+
+
+/* =========================================
+   SUCCESS MESSAGE
+========================================= */
+
+.success-message {
+
+    padding: 12px;
+
+    margin-bottom: 15px;
+
+    color: #8bf2ba;
+
+    background: rgba(20,190,100,0.08);
+
+    border: 1px solid rgba(50,220,130,0.2);
+}
+
+
+/* =========================================
+   DISCORD BUTTON
+========================================= */
+
+.discord-btn {
+
+    width: 100%;
+
+    height: 52px;
+
+    border: none;
+
+    cursor: pointer;
+
+    background: #5865f2;
+
+    color: white;
+
+    font-family: 'Rajdhani', sans-serif;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    transition: 0.2s;
+}
+
+
+.discord-btn:hover {
+
+    background: #707bff;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   RETRY
+========================================= */
+
+.retry-btn {
+
+    width: 100%;
+
+    height: 52px;
+
+    border: 1px solid #31506e;
+
+    cursor: pointer;
+
+    background: #122238;
+
+    color: white;
+
+    font-family: 'Rajdhani', sans-serif;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.retry-btn:hover {
+
+    background: #1b334e;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    margin-top: 25px;
+
+    color: #50657b;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.3px;
+}
+
+
+.footer-dot {
+
+    color: #2476ad;
+}
+
+
+/* =========================================
+   HIDDEN
+========================================= */
+
+.hidden {
+
+    display: none !important;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .page {
+
+        padding: 20px 12px;
+
+    }
+
+
+    .card {
+
+        padding: 25px 20px;
+
+    }
+
+
+    .brand h1 {
+
+        font-size: 12px;
+
+    }
+
+
+    .brand p {
+
+        font-size: 9px;
+
+        letter-spacing: 2px;
+
+    }
+
+
+    .intro h2 {
+
+        font-size: 22px;
+
+    }
+
+
+    .editions {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- Background -->
+<div class="background"></div>
+
+
+<div class="page">
+
+
+    <main class="card">
+
+
+        <!-- =================================
+             BRAND
+        ================================== -->
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                ⚔
+            </div>
+
+            <div>
+
+                <h1>WARRIOR BOT</h1>
+
+                <p>
+                    MINECRAFT VERIFICATION
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================
+             INTRO
+        ================================== -->
+
+        <div class="intro">
+
+            <h2>
+                Verify Your Minecraft Account
+            </h2>
+
+            <p>
+                Verify your Minecraft account to
+                access the Warrior SMP Discord server.
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================
+             VERIFICATION FORM
+        ================================== -->
+
+        <form id="verificationForm">
+
+
+            <!-- Username -->
+
+            <div class="form-group">
+
+                <label for="minecraftUsername">
+                    MINECRAFT USERNAME
+                </label>
+
+
+                <div class="input-box">
+
+                    <div class="input-icon">
+                        ⛏
+                    </div>
+
+
+                    <input
+                        type="text"
+                        id="minecraftUsername"
+                        placeholder="Enter your Minecraft username"
+                        maxlength="16"
+                        autocomplete="off"
+                        required
+                    >
+
+                </div>
+
+
+                <small
+                    class="help-text"
+                    id="usernameHelp"
+                >
+                    Enter the username you use in Minecraft.
+                </small>
+
+            </div>
+
+
+
+            <!-- Edition -->
+
+            <div class="form-group">
+
+                <label>
+                    MINECRAFT EDITION
+                </label>
+
+
+                <div class="editions">
+
+
+                    <label class="edition">
+
+                        <input
+                            type="radio"
+                            name="edition"
+                            value="Java"
+                            checked
+                        >
+
+
+                        <span class="edition-content">
+
+                            <span class="edition-icon">
+                                ⚔
+                            </span>
+
+                            <span>
+
+                                <span class="edition-title">
+                                    Java
+                                </span>
+
+                                <span class="edition-description">
+                                    Java Edition
+                                </span>
+
+                            </span>
+
+                        </span>
+
+                    </label>
+
+
+
+                    <label class="edition">
+
+                        <input
+                            type="radio"
+                            name="edition"
+                            value="Bedrock"
+                        >
+
+
+                        <span class="edition-content">
+
+                            <span class="edition-icon">
+                                ◆
+                            </span>
+
+                            <span>
+
+                                <span class="edition-title">
+                                    Bedrock
+                                </span>
+
+                                <span class="edition-description">
+                                    Bedrock Edition
+                                </span>
+
+                            </span>
+
+                        </span>
+
+                    </label>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CAPTCHA -->
+
+            <div class="form-group">
+
+                <label>
+                    SECURITY CHECK
+                </label>
+
+
+                <div class="captcha">
+
+
+                    <label class="captcha-left">
+
+                        <input
+                            type="checkbox"
+                            id="captcha"
+                        >
+
+                        <span class="checkbox"></span>
+
+                        <span>
+                            I'm not a robot
+                        </span>
+
+                    </label>
+
+
+                    <div class="security">
+
+                        <div class="security-icon">
+                            🛡️
+                        </div>
+
+                        WARRIOR<br>
+                        SECURITY
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- VERIFY -->
+
+            <button
+                type="submit"
+                class="verify-btn"
+                id="verifyButton"
+            >
+
+                ⚔
+                VERIFY ACCOUNT
+
+            </button>
+
+
+        </form>
+
+
+
+        <!-- =================================
+             LOADING
+        ================================== -->
+
+        <section
+            class="loading hidden"
+            id="loadingSection"
+        >
+
+            <div class="loader"></div>
+
+
+            <h3>
+                VERIFYING ACCOUNT...
+            </h3>
+
+
+            <p>
+                Checking your Minecraft username.
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================
+             SUCCESS
+        ================================== -->
+
+        <section
+            class="result success hidden"
+            id="successSection"
+        >
+
+            <div class="result-icon">
+                ✓
+            </div>
+
+
+            <h2>
+                VERIFICATION<br>
+                SUCCESSFUL!
+            </h2>
+
+
+            <p>
+                Your Minecraft account has been verified.
+            </p>
+
+
+
+            <div class="player-card">
+
+                <div class="player-avatar">
+                    ⛏
+                </div>
+
+
+                <div>
+
+                    <small>
+                        MINECRAFT ACCOUNT
+                    </small>
+
+                    <strong id="verifiedUsername">
+                        Player
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="success-message">
+
+                ✓
+                You can now return to Discord.
+
+            </div>
+
+
+
+            <button
+                class="discord-btn"
+                id="discordButton"
+                type="button"
+            >
+
+                💬
+                RETURN TO DISCORD
+
+            </button>
+
+
+        </section>
+
+
+
+        <!-- =================================
+             ERROR
+        ================================== -->
+
+        <section
+            class="result error hidden"
+            id="errorSection"
+        >
+
+            <div class="result-icon">
+                !
+            </div>
+
+
+            <h2>
+                VERIFICATION FAILED
+            </h2>
+
+
+            <p id="errorMessage">
+                Something went wrong.
+            </p>
+
+
+            <button
+                class="retry-btn"
+                id="retryButton"
+                type="button"
+            >
+
+                TRY AGAIN
+
+            </button>
+
+        </section>
+
+
+
+        <!-- =================================
+             FOOTER
+        ================================== -->
+
+        <div class="footer">
+
+            <span>
+                ⚔ WARRIOR SMP
+            </span>
+
+            <span class="footer-dot">
+                •
+            </span>
+
+            <span>
+                SECURE VERIFICATION
+            </span>
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+
+<script>
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const form =
+    document.getElementById("verificationForm");
+
+const usernameInput =
+    document.getElementById("minecraftUsername");
+
+const usernameHelp =
+    document.getElementById("usernameHelp");
+
+const captcha =
+    document.getElementById("captcha");
+
+const loadingSection =
+    document.getElementById("loadingSection");
+
+const successSection =
+    document.getElementById("successSection");
+
+const errorSection =
+    document.getElementById("errorSection");
+
+const errorMessage =
+    document.getElementById("errorMessage");
+
+const verifiedUsername =
+    document.getElementById("verifiedUsername");
+
+const retryButton =
+    document.getElementById("retryButton");
+
+const discordButton =
+    document.getElementById("discordButton");
+
+
+/* =========================================
+   USERNAME INPUT
+========================================= */
+
+usernameInput.addEventListener(
+    "input",
+    function () {
+
+        /* Only allow Minecraft-style characters */
+
+        this.value =
+            this.value.replace(
+                /[^a-zA-Z0-9_]/g,
+                ""
+            );
+
+
+        const username =
+            this.value.trim();
+
+
+        if (username.length === 0) {
+
+            usernameHelp.textContent =
+                "Enter the username you use in Minecraft.";
+
+            usernameHelp.style.color =
+                "#63788e";
+
+            return;
+        }
+
+
+        if (username.length < 3) {
+
+            usernameHelp.textContent =
+                "Username must contain at least 3 characters.";
+
+            usernameHelp.style.color =
+                "#ff5965";
+
+            return;
+        }
+
+
+        usernameHelp.textContent =
+            "Username format looks valid.";
+
+        usernameHelp.style.color =
+            "#55c7ff";
+
+    }
+);
+
+
+/* =========================================
+   FORM SUBMIT
+========================================= */
+
+form.addEventListener(
+    "submit",
+    async function (event) {
+
+        event.preventDefault();
+
+
+        const username =
+            usernameInput.value.trim();
+
+
+        const edition =
+            document.querySelector(
+                'input[name="edition"]:checked'
+            ).value;
+
+
+        /* Username validation */
+
+        if (username.length < 3) {
+
+            showError(
+                "Please enter a valid Minecraft username."
+            );
+
+            return;
+        }
+
+
+        /* CAPTCHA */
+
+        if (!captcha.checked) {
+
+            showError(
+                "Please complete the security check."
+            );
+
+            return;
+        }
+
+
+        /* Hide form */
+
+        form.classList.add("hidden");
+
+        errorSection.classList.add("hidden");
+
+        successSection.classList.add("hidden");
+
+        loadingSection.classList.remove("hidden");
+
+
+        console.log(
+            "Verification request:",
+            {
+                username: username,
+                edition: edition
+            }
+        );
+
+
+        /*
+        =========================================
+        DEMO VERIFICATION
+        =========================================
+
+        This is temporary.
+
+        Later this section will communicate
+        with your Warrior Bot backend.
+
+        The backend will:
+
+        1. Check Minecraft username
+        2. Check CAPTCHA
+        3. Check Discord OAuth
+        4. Link Discord + Minecraft
+        5. Give Discord roles
+        */
+
+
+        await sleep(2500);
+
+
+        /* Demo success */
+
+        loadingSection.classList.add("hidden");
+
+        verifiedUsername.textContent =
+            username;
+
+        successSection.classList.remove("hidden");
+
+    }
+);
+
+
+/* =========================================
+   SHOW ERROR
+========================================= */
+
+function showError(message) {
+
+    form.classList.remove("hidden");
+
+    loadingSection.classList.add("hidden");
+
+    successSection.classList.add("hidden");
+
+    errorMessage.textContent =
+        message;
+
+    errorSection.classList.remove("hidden");
+}
+
+
+/* =========================================
+   RETRY
+========================================= */
+
+retryButton.addEventListener(
+    "click",
+    function () {
+
+        errorSection.classList.add("hidden");
+
+        form.classList.remove("hidden");
+
+    }
+);
+
+
+/* =========================================
+   DISCORD BUTTON
+========================================= */
+
+discordButton.addEventListener(
+    "click",
+    function () {
+        window.location.href =
+            "https://discord.gg/6k2HUWVu94";
+    }
+);
+
+
+/* =========================================
+   SLEEP FUNCTION
+========================================= */
+
+function sleep(milliseconds) {
+
+    return new Promise(
+        function (resolve) {
+
+            setTimeout(
+                resolve,
+                milliseconds
+            );
+
+        }
+    );
+
+}
+
+</script>
+
+</body>
+</html>
